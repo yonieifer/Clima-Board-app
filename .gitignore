@@ -1,0 +1,34 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+.venv/
+ENV/
+
+# Secrets and Environment Variables (קריטי כדי לא לחשוף מפתחות API)
+.env
+.env.*
+*.pem
+secrets.json
+
+# Logs
+*.log
+
+# Databases (אם אתה משתמש במסד נתונים מקומי כמו SQLite)
+*.sqlite3
+db.sqlite3
+
+# IDEs and OS-specific files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Testing / Coverage
+.pytest_cache/
+.coverage
+htmlcov/
