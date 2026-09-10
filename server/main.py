@@ -5,14 +5,15 @@ from services.api_service import (
     get_weather_forecast,
     compare_cities_weather,
 )
-from schemas.models import Lat, Long, CityPath, CityQuery
+from services.favorites_service import add_favorite, delete_favorite, get_favorites
+from schemas.models import Lat, Long, CityPath, CityQuery, NameQuery
 
 app = FastAPI()
 
 
 @app.get("/health")
 def health_check():
-    return {"result": "ok"}
+    return {"message": "ok"}
 
 
 @app.get("/details/{city}")
@@ -37,3 +38,19 @@ def weather_forecast(lat: Lat, long: Long):
 def compare_cities(city1: CityQuery, city2: CityQuery):
     results = compare_cities_weather(city1, city2)
     return {"result": results}
+
+@app.get("/favorites/{name}")
+def get(name: NameQuery):
+    favorites = get_favorites(name)
+    return {"result": favorites}
+
+@app.post("/favorites")
+def add(name: NameQuery, city: CityQuery):
+    add_favorite(name, city)
+    return {"message": "added to favorites"}
+
+@app.delete("/favorites")
+def delete(name: NameQuery, city: CityQuery):
+    delete_favorite(name, city)
+    return {"message": "deleted from favorites"}
+    
