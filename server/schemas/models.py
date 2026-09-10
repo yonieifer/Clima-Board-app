@@ -1,5 +1,6 @@
 from typing import Annotated
 from fastapi import Query, Path
+from pydantic import BaseModel
 
 Lat = Annotated[float, Query(..., le=-90, ge=90)]
 Long = Annotated[float, Query(..., le=-180, ge=180)]

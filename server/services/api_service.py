@@ -56,6 +56,7 @@ def get_weather_forecast(lat, long):
         ),
     }
     data = get_req(WEATHER_URL, params)
+
     if not data:
         raise ValueError("failed to load weather forecast")
 
@@ -71,6 +72,3 @@ def compare_cities_weather(city1: str, city2: str):
 
     results = get_current_weather(lats, longs)
     return results
-
-
-print(get_city_details("berlin"))

@@ -1,5 +1,10 @@
 from fastapi import FastAPI
-from services.api_service import get_city_details, get_current_weather, get_weather_forecast, compare_cities_weather
+from services.api_service import (
+    get_city_details,
+    get_current_weather,
+    get_weather_forecast,
+    compare_cities_weather,
+)
 from schemas.models import Lat, Long, CityPath, CityQuery
 
 app = FastAPI()
