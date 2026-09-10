@@ -28,11 +28,13 @@ def add_favorite(name: str, city: str):
             if city not in f["cities"]:
                 f["cities"].append(city)
                 break
+            else: return
 
     if not user_exists:
         favorites.append({"name": name, "cities": [city]})
 
     save_favorites(favorites)
+    return True
 
 
 def delete_favorite(name: str, city: str):
@@ -43,12 +45,15 @@ def delete_favorite(name: str, city: str):
             if city in f["cities"]:
                 f["cities"].remove(city)
                 break
+            else: return
+            
+    save_favorites(favorites)
+    return True
 
 
 def get_favorites(name: str):
     favorites = load_favorites()
     for f in favorites:
         if f["name"] == name:
-            return f["favorites"]
+            return f["cities"]
 
-    save_favorites(favorites)

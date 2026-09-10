@@ -9,7 +9,7 @@ from schemas.models import Lat, Long, CityQuery, CityPath
 
 router = APIRouter(prefix="/weather", tags=["weather"])
 
-@router.get("details/{city}")
+@router.get("/details/{city}")
 def find_city(city: CityPath):
     details = get_city_details(city)
     return {"result": details}
