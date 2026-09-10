@@ -7,6 +7,7 @@ from services.api_service import (
 )
 from services.favorites_service import add_favorite, delete_favorite, get_favorites
 from schemas.models import Lat, Long, CityPath, CityQuery, NameQuery
+from services.atbash_service import get_atbash
 
 app = FastAPI()
 
@@ -39,18 +40,25 @@ def compare_cities(city1: CityQuery, city2: CityQuery):
     results = compare_cities_weather(city1, city2)
     return {"result": results}
 
+
 @app.get("/favorites/{name}")
 def get(name: NameQuery):
     favorites = get_favorites(name)
     return {"result": favorites}
+
 
 @app.post("/favorites")
 def add(name: NameQuery, city: CityQuery):
     add_favorite(name, city)
     return {"message": "added to favorites"}
 
+
 @app.delete("/favorites")
 def delete(name: NameQuery, city: CityQuery):
     delete_favorite(name, city)
     return {"message": "deleted from favorites"}
-    
+
+@app.get("/atbash")
+def atbash(word: str):
+    result = get_atbash(word)
+    return {"result": result}
