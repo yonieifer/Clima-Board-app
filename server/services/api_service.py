@@ -1,4 +1,5 @@
 import requests
+from fastapi import HTTPException
 
 GEO_URL = "https://geocoding-api.open-meteo.com/v1/search"
 WEATHER_URL = "https://api.open-meteo.com/v1/forecast"
@@ -16,7 +17,7 @@ def get_city_details(city: str):
     results = data.get("results")
 
     if not results:
-        raise ValueError(f"failed to find {city} details")
+        raise HTTPException(detail=f"failed to find {city} details")
 
     return results
 
@@ -37,7 +38,7 @@ def get_current_weather(lat, long):
     data = get_req(WEATHER_URL, params)
 
     if not data:
-        raise ValueError("failed to load current weather")
+        raise HTTPException(detail="failed to load current weather")
 
     return data
 
@@ -58,7 +59,7 @@ def get_weather_forecast(lat, long):
     data = get_req(WEATHER_URL, params)
 
     if not data:
-        raise ValueError("failed to load weather forecast")
+        raise HTTPException(detail="failed to load weather forecast")
 
     return data
 
