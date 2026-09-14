@@ -11,6 +11,7 @@ function Dashboard() {
             <Link to="/app/favorites">Favorites</Link>
             <Link to="/app/compare">Compare</Link>
         </nav>
+        
     </>
   )
 }
