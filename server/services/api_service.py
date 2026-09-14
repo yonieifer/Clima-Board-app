@@ -1,4 +1,5 @@
 import requests
+import time
 
 GEO_URL = "https://geocoding-api.open-meteo.com/v1/search"
 WEATHER_URL = "https://api.open-meteo.com/v1/forecast"
@@ -18,7 +19,17 @@ def get_city_details(city: str):
     if not results:
         return
 
-    return results
+    cities_list = [
+        {
+            "city": c["name"],
+            "country": c["country"],
+            "latitude": c["latitude"],
+            "longitude": c["longitude"],
+        }
+        for c in results
+    ]
+
+    return cities_list
 
 
 def get_current_weather(lat, long):
@@ -39,7 +50,10 @@ def get_current_weather(lat, long):
     if not data:
         return
 
-    return data
+    if type(data) == list:
+        return data
+
+    return data["current"]
 
 
 def get_weather_forecast(lat, long):
@@ -60,7 +74,19 @@ def get_weather_forecast(lat, long):
     if not data:
         return
 
-    return data
+    daily_weather = data["daily"]
+    forecast_List = [
+        {
+            "time": daily_weather["time"][i],
+            "temperature_2m_mean": daily_weather["temperature_2m_mean"][i],
+            "weather_code": daily_weather["weather_code"][i],
+            "wind_speed_10m_max": daily_weather["wind_speed_10m_max"][i],
+            "apparent_temperature_mean": daily_weather["apparent_temperature_mean"][i],
+        }
+        for i in range(len(daily_weather["time"]))
+    ]
+
+    return forecast_List
 
 
 def compare_cities_weather(city1: str, city2: str):
@@ -74,4 +100,4 @@ def compare_cities_weather(city1: str, city2: str):
     longs = f"{details1['longitude']},{details2['longitude']}"
 
     results = get_current_weather(lats, longs)
-    return results
+    return [c["current"] for c in results]

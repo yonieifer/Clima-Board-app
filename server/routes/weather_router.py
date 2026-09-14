@@ -17,7 +17,7 @@ def find_city(city: CityPath):
     if not details:
         raise HTTPException(404, f"not found city named {city}")
 
-    return {"result": details}
+    return details
 
 
 @router.get("/current")
@@ -27,7 +27,7 @@ def current_weather(lat: Lat, long: Long):
     if not weather:
         raise HTTPException(404, f"cannot get weather for {lat}/{long}")
 
-    return {"result": weather}
+    return weather
 
 
 @router.get("/forecast")
@@ -37,7 +37,7 @@ def weather_forecast(lat: Lat, long: Long):
     if not forecast:
         raise HTTPException(404, f"cannot get weather for {lat}/{long}")
 
-    return {"result": forecast}
+    return forecast
 
 
 @router.get("/compare")
@@ -47,4 +47,4 @@ def compare_cities(city1: CityQuery, city2: CityQuery):
     if not results:
         raise HTTPException(404, f"cannot get weather for {city1} or {city2}")
 
-    return {"result": results}
+    return results

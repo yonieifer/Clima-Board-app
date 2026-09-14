@@ -10,7 +10,7 @@ def get(name: NamePath):
     favorites = get_favorites(name)
     if not favorites:
         raise HTTPException(404, "no favorites found")
-    return {"result": favorites}
+    return favorites
 
 
 @router.post("", status_code=201)
@@ -18,7 +18,7 @@ def add(name: NameQuery, city: CityQuery):
     is_added = add_favorite(name, city)
     if not is_added:
         raise HTTPException(400, f"{city} already in your favorite")
-    return {"message": "added to favorites"}
+    return "added to favorites"
 
 
 @router.delete("")
@@ -26,4 +26,4 @@ def delete(name: NameQuery, city: CityQuery):
     is_deleted = delete_favorite(name, city)
     if not is_deleted:
         raise HTTPException(400, f"{city} not in your favotites")
-    return {"message": "deleted from favorites"}
+    return "deleted from favorites"
