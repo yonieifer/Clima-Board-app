@@ -1,4 +1,3 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 
@@ -6,10 +5,10 @@ function Layout() {
     return (
         <>
             <header>
-                <Dashboard/>
+                <Dashboard />
             </header>
             <main>
-                <Outlet/>
+                <Outlet />
             </main>
         </>
     );

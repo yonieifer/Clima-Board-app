@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useCityDetails } from "../hooks/useWeather";
 import type { CityDetailsType } from "../types/City";
-import CityCard from "../components/CityCard";
-import { AxiosError } from "axios";
 
 function Search() {
     const [search, setSearch] = useState("");
