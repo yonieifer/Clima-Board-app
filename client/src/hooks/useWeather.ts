@@ -14,7 +14,7 @@ export function useCityDetails<T>(name: string) {
     useEffect(() => {
         setLoading(true);
         cityDetails(name)
-            .then((res) => setData(res.data))
+            .then((res) => setData(res))
             .catch((err) => setError(err))
             .finally(() => setLoading(false));
     }, [name]);
@@ -30,7 +30,7 @@ export function useCurrentWeather<T>(lat: number, long: number) {
     useEffect(() => {
         setLoading(true);
         currentWeather(lat, long)
-            .then((res) => setData(res.data))
+            .then((res) => setData(res))
             .catch((err) => setError(err))
             .finally(() => setLoading(false));
     }, [lat, long]);
@@ -46,7 +46,7 @@ export function useWeatherForecast<T>(lat: number, long: number) {
     useEffect(() => {
         setLoading(true);
         weatherForecast(lat, long)
-            .then((res) => setData(res.data))
+            .then((res) => setData(res))
             .catch((err) => setError(err))
             .finally(() => setLoading(false));
     }, [lat, long]);
@@ -62,7 +62,7 @@ export function useCompare<T>(city1: string, city2: string) {
     useEffect(() => {
         setLoading(true);
         compare(city1, city2)
-            .then((res) => setData(res.data))
+            .then((res) => setData(res))
             .catch((err) => setError(err))
             .finally(() => setLoading(false));
     }, [city1, city2]);
