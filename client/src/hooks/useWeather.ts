@@ -5,26 +5,29 @@ import {
     weatherForecast,
     compare,
 } from "../services/weatherService";
+import type { AxiosError } from "axios";
 
-export function useCityDetails<T>(name: string) {
+export function useCityDetails<T>() {
     const [isLoading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<AxiosError | null>(null);
     const [data, setData] = useState<T | null>(null);
 
-    useEffect(() => {
+    const getSearch = (name: string) => {
         setLoading(true);
+        setData(null)
+        setError(null)
         cityDetails(name)
             .then((res) => setData(res))
             .catch((err) => setError(err))
             .finally(() => setLoading(false));
-    }, [name]);
+    };
 
-    return [isLoading, error, data] as const;
+    return {getSearch, isLoading, error, data} as const;
 }
 
 export function useCurrentWeather<T>(lat: number, long: number) {
     const [isLoading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<AxiosError | null>(null);
     const [data, setData] = useState<T | null>(null);
 
     useEffect(() => {
@@ -35,12 +38,12 @@ export function useCurrentWeather<T>(lat: number, long: number) {
             .finally(() => setLoading(false));
     }, [lat, long]);
 
-    return [isLoading, error, data] as const;
+    return {isLoading, error, data} as const;
 }
 
 export function useWeatherForecast<T>(lat: number, long: number) {
     const [isLoading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<AxiosError | null>(null);
     const [data, setData] = useState<T | null>(null);
 
     useEffect(() => {
@@ -51,12 +54,12 @@ export function useWeatherForecast<T>(lat: number, long: number) {
             .finally(() => setLoading(false));
     }, [lat, long]);
 
-    return [isLoading, error, data] as const;
+    return {isLoading, error, data} as const;
 }
 
 export function useCompare<T>(city1: string, city2: string) {
     const [isLoading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<AxiosError | null>(null);
     const [data, setData] = useState<T | null>(null);
 
     useEffect(() => {
@@ -67,5 +70,5 @@ export function useCompare<T>(city1: string, city2: string) {
             .finally(() => setLoading(false));
     }, [city1, city2]);
 
-    return [isLoading, error, data] as const;
+    return {isLoading, error, data} as const;
 }

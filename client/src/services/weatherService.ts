@@ -2,7 +2,7 @@ import axios from "axios";
 
 const WEATHER_API = axios.create({
     baseURL: "http://localhost:8000",
-    timeout: 5000,
+    timeout: 10000,
 });
 
 export const cityDetails = async (name: string) => {

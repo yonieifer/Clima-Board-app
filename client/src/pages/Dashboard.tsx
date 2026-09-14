@@ -1,28 +1,25 @@
-import { Link, Outlet } from "react-router-dom";
 import { useCurrentWeather } from "../hooks/useWeather";
 import CityCard from "../components/CityCard";
 import type { CurrentCityWeather } from "../types/City";
+import { Link } from "react-router-dom";
 
 function Dashboard() {
-    const [isLoading, error, data] = useCurrentWeather<CurrentCityWeather>(
+    const {isLoading, error, data} = useCurrentWeather<CurrentCityWeather>(
         32,
         34,
     );
-    const name = localStorage.getItem("name");
+    const name = localStorage.getItem("name") || "Guest";
     return (
         <>
             <h1>Hello, {name}!</h1>
-            <nav>
-                {/* <Link to="/app/search">Search</Link>
-                <Link to="/app/favorites">Favorites</Link>
-                <Link to="/app/compare">Compare</Link> */}
-            </nav>
             {isLoading && <h3>Loading...</h3>}
-            {error && <h3>Error</h3>}
-            {console.log(data)
-            }
+            {error && <h3>{error.message}</h3>}
             {data && <CityCard city={data} name="Tel Aviv" />}
-            <Outlet/>
+            <nav>
+                <Link to="/app/search">Search</Link>
+                <Link to="/app/favorites">Favorites</Link>
+                <Link to="/app/compare">Compare</Link>
+            </nav>
         </>
     );
 }
