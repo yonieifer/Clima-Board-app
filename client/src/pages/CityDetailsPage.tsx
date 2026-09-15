@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useCurrentWeather, useWeatherForecast } from "../hooks/useWeather";
 import CityDetailsList from "../components/CityDetailsList";
@@ -18,10 +17,11 @@ function CityDetailsPage() {
     } = useCurrentWeather<CurrentCityWeather>(Number(lat), Number(long));
     return (
         <>
+            <h2>{city}</h2>
             <h2>Current Weather</h2>
             {currLoading && <h3>Loading...</h3>}
             {currError && <h3>{currError.message}</h3>}
-            {currData && city && <CityCard city={currData} name={city} />}
+            {currData && <CityCard city={currData}/>}
             <h2>Forecast</h2>
             {isLoading && <h3>Loading...</h3>}
             {error && <h3>{error.message}</h3>}
