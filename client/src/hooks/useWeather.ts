@@ -14,7 +14,6 @@ export function useCityDetails<T>() {
 
     const getSearch = (name: string) => {
         setLoading(true);
-        setData(null)
         setError(null)
         cityDetails(name)
             .then((res) => setData(res))
@@ -32,6 +31,7 @@ export function useCurrentWeather<T>(lat: number, long: number) {
 
     useEffect(() => {
         setLoading(true);
+        setError(null)
         currentWeather(lat, long)
             .then((res) => setData(res))
             .catch((err) => setError(err))

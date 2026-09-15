@@ -22,7 +22,7 @@ def get_city_details(city: str):
     cities_list = [
         {
             "city": c["name"],
-            "country": c["country"],
+            "country": c.get("country"),
             "latitude": c["latitude"],
             "longitude": c["longitude"],
         }

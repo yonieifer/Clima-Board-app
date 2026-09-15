@@ -13,11 +13,12 @@ export const useGetFavorites = <T>(name: string) => {
 
     useEffect(() => {
         setLoading(true);
+        setError(null)
         getFavorites(name)
             .then((data) => setData(data))
             .catch((err) => setError(err))
             .finally(() => setLoading(false));
-    }, [name, data]);
+    }, [name]);
 
     return { isLoading, error, data };
 };
