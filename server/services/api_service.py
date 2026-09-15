@@ -53,7 +53,17 @@ def get_current_weather(lat, long):
     if type(data) == list:
         return data
 
-    return data["current"]
+    current = data["current"]
+    
+    return {
+        "lat": data["latitude"],
+        "long": data["longitude"],
+        "time": current["time"],
+        "temperature_2m": current["temperature_2m"],
+        "weather_code": current["weather_code"],
+        "wind_speed_10m": current["wind_speed_10m"],
+        "apparent_temperature": current["apparent_temperature"],
+    }
 
 
 def get_weather_forecast(lat, long):

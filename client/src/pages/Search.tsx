@@ -1,14 +1,18 @@
 import { useState } from "react";
 import { useCityDetails } from "../hooks/useWeather";
 import type { CityDetailsType } from "../types/City";
+import { useNavigate } from "react-router-dom";
 
 function Search() {
     const [search, setSearch] = useState("");
     const { getSearch, isLoading, error, data } =
         useCityDetails<CityDetailsType[]>();
+    const navigate = useNavigate();
     const onSearch = () => {
         getSearch(search);
     };
+    const toForecast = (name: string, lat: number, long: number) =>
+        navigate(`/app/${name}/${lat}/${long}`);
 
     return (
         <>
@@ -29,6 +33,13 @@ function Search() {
                         </h3>
                         <p>latitude: {c.latitude}</p>
                         <p>longitude: {c.latitude}</p>
+                        <button
+                            onClick={() =>
+                                toForecast(search, c.latitude, c.longitude)
+                            }
+                        >
+                            watch full forecast
+                        </button>
                     </article>
                 ))}
         </>
