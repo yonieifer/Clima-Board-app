@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from services.favorites_service import add_favorite, delete_favorite, get_favorites
 from schemas.models import CityQuery, NameQuery, NamePath
+from services.api_service import get_city_details
 
 router = APIRouter(prefix="/favorites", tags=["favorites"])
 
@@ -10,7 +11,9 @@ def get(name: NamePath):
     favorites = get_favorites(name)
     if not favorites:
         raise HTTPException(404, "no favorites found")
-    return favorites
+
+    favorites_details = [get_city_details(f)[0] for f in favorites]
+    return favorites_details
 
 
 @router.post("", status_code=201)

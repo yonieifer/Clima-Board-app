@@ -4,7 +4,8 @@ import Welcome from "./pages/Welcome";
 import Search from "./pages/Search";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
 import NotFound from "./pages/NotFound";
-import CityDetailsPage from "./pages/CityDetailsPage";
+import FullCityPage from "./pages/FullCityPage";
+import FavoritesPage from "./pages/FavoritesPage";
 
 function App() {
     return (
@@ -15,10 +16,16 @@ function App() {
                     <Route element={<ProtectedRoutes />}>
                         <Route path="/app" element={<Layout />}>
                             <Route path="/app/search" element={<Search />} />
-                            <Route path="/app/favorites" element />
+                            <Route
+                                path="/app/favorites"
+                                element={<FavoritesPage />}
+                            />
                             <Route path="/app/compare" element />
-                            <Route path="/app/:city/:lat/:long" element={<CityDetailsPage/>}/>
-                            <Route path="*" element={<NotFound/>} />
+                            <Route
+                                path="/app/:city/:lat/:long"
+                                element={<FullCityPage />}
+                            />
+                            <Route path="*" element={<NotFound />} />
                         </Route>
                     </Route>
                 </Routes>

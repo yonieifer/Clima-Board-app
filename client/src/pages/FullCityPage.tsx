@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useCurrentWeather, useWeatherForecast } from "../hooks/useWeather";
-import CityDetailsList from "../components/CityDetailsList";
+import FullCityList from "../components/FullCityList";
 import type { DailyForecastType, CurrentCityWeather } from "../types/City";
 import CityCard from "../components/CityCard";
 
-function CityDetailsPage() {
+function FullCityPage() {
     const { city, lat, long } = useParams();
     const { isLoading, error, data } = useWeatherForecast<DailyForecastType[]>(
         Number(lat),
@@ -25,9 +25,9 @@ function CityDetailsPage() {
             <h2>Forecast</h2>
             {isLoading && <h3>Loading...</h3>}
             {error && <h3>{error.message}</h3>}
-            {data && <CityDetailsList forecast={data} />}
+            {data && <FullCityList forecast={data} />}
         </>
     );
 }
 
-export default CityDetailsPage;
+export default FullCityPage;
