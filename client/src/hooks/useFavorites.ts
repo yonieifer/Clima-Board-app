@@ -11,16 +11,20 @@ export const useGetFavorites = <T>(name: string) => {
     const [error, setError] = useState<AxiosError | null>(null);
     const [data, setData] = useState<T | null>(null);
 
-    useEffect(() => {
+    const fetchData = () => {
         setLoading(true);
-        setError(null)
+        setError(null);
         getFavorites(name)
             .then((data) => setData(data))
             .catch((err) => setError(err))
             .finally(() => setLoading(false));
+    };
+
+    useEffect(() => {
+        fetchData()
     }, [name]);
 
-    return { isLoading, error, data };
+    return { fetchData, isLoading, error, data };
 };
 
 export const useAddFavorite = () => {

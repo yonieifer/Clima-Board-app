@@ -9,7 +9,7 @@ function FavoritesList({ name }: { name: string }) {
         <>
             {isLoading && <h3>Loading...</h3>}
             {error && <h3>{error.message}</h3>}
-            {data && data.map((city) => <CityDetailsCard city={city} />)}
+            {data && data.map((city) => <CityDetailsCard key={city.latitude} city={city} favorites={data}/>)}
         </>
     );
 }
