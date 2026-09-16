@@ -10,7 +10,7 @@ function Search() {
     const [search, setSearch] = useState("");
     const { getSearch, isLoading, error, data } =
         useCityDetails<CityDetailsType[]>();
-    const { data: favoriteData } = useGetFavorites<CityDetailsType[]>(name);
+    const {fetchData,  data: favoriteData } = useGetFavorites<CityDetailsType[]>(name);
 
     const onSearch = () => {
         getSearch(search);
@@ -34,6 +34,7 @@ function Search() {
                         key={c.latitude}
                         city={c}
                         favorites={favoriteData}
+                        fetchData={fetchData}
                     />
                 ))}
         </>

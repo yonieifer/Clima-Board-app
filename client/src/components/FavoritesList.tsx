@@ -3,13 +3,22 @@ import type { CityDetailsType } from "../types/City";
 import CityDetailsCard from "./CityDetailsCard";
 
 function FavoritesList({ name }: { name: string }) {
-    const { isLoading, error, data } = useGetFavorites<CityDetailsType[]>(name);
+    const { fetchData, isLoading, error, data } =
+        useGetFavorites<CityDetailsType[]>(name);
 
     return (
         <>
             {isLoading && <h3>Loading...</h3>}
             {error && <h3>{error.message}</h3>}
-            {data && data.map((city) => <CityDetailsCard key={city.latitude} city={city} favorites={data}/>)}
+            {data &&
+                data.map((city) => (
+                    <CityDetailsCard
+                        key={city.latitude}
+                        city={city}
+                        favorites={data}
+                        fetchData={fetchData}
+                    />
+                ))}
         </>
     );
 }

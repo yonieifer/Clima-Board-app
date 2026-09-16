@@ -1,14 +1,13 @@
 import {
     useAddFavorite,
     useDeleteFavorite,
-    useGetFavorites,
 } from "../hooks/useFavorites";
 import type { CityDetailsType } from "../types/City";
 import { useNavigate } from "react-router-dom";
 
 const name = localStorage.getItem("name")!;
 
-function CityDetailsCard({ city, favorites }: { city: CityDetailsType, favorites: CityDetailsType[] }) {
+function CityDetailsCard({ city, favorites, fetchData }: { city: CityDetailsType, favorites: CityDetailsType[], fetchData: () => void }) {
     const navigate = useNavigate();
     const { add } = useAddFavorite();
     const { remove } = useDeleteFavorite();
@@ -22,13 +21,14 @@ function CityDetailsCard({ city, favorites }: { city: CityDetailsType, favorites
                 {city.city}, {city.country}
             </h3>
             <p>latitude: {city.latitude}</p>
-            <p>longitude: {city.latitude}</p>
+            <p>longitude: {city.longitude}</p>
             <button onClick={() => toForecast(city.latitude, city.longitude)}>
                 watch full forecast
             </button>
             <button
                 onClick={() => {
                     isFavorite ? remove(name, city.city) : add(name, city.city);
+                    fetchData()
                 }}
             >
                 {isFavorite ? "❤️" : "🤍"}
